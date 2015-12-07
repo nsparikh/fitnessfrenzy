@@ -1,0 +1,878 @@
+/****************************************/
+/* Colors */
+/****************************************/
+$mainColor: #3FB8AF;
+$accentColor: #FF3D7F;
+$darkGray: #7A7A7A;
+$lightGray: #EEEEEE;
+$paleMainColor: #BDF0EC;
+$paleAccentColor: #FFC9DC;
+$darkAccentColor: #CC3166;
+
+$headerHeight: 50px;
+$minWidth: 1000px;
+
+/****************************************/
+/* Universal styles */
+/****************************************/
+
+html {
+	font-family: 'Lato', sans-serif;
+	font-weight: 400;
+	min-width: $minWidth;
+	width: 100%;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	min-width: $minWidth;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 300;
+	margin: 0;
+}
+
+button, .button {
+	background: $accentColor;
+	padding: 20px 25px;
+
+	border: none;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+
+	color: white;
+	text-shadow: 0 1px 2px rgba(0,0,0,.4);
+	font-family: 'Lato', sans-serif;
+	font-weight: 400;
+	font-size: 16px;
+	text-transform: uppercase;
+}
+
+button:hover, .button:hover {
+	background: $darkAccentColor;
+}
+button:active, .button:active {
+	background: $darkAccentColor;
+	position: relative;
+	top: 1px;
+}
+
+.center {
+	text-align: center;
+}
+
+.vert-center {
+	vertical-align: center;
+}
+
+.pull-right {
+	float: right;
+}
+
+.pull-left {
+	float: left;
+}
+
+a { 
+	font-weight: 400;
+	color: inherit;
+	text-decoration: none;
+}
+a:hover { color: $accentColor; }
+a:active { color: $accentColor; }
+
+.text-shadow {
+	text-shadow: 0 1px 1px rgba(0,0,0,.5);
+}
+
+.hidden {
+	display: none;
+}
+
+.tile {
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	box-shadow: 0px 0px 3px $darkGray;
+}
+
+
+#container {
+	margin: $headerHeight 0 0 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+	min-width: 100%;
+}
+
+/****************************************/
+/* Errors and Alerts */
+/****************************************/
+#error_explanation {
+	text-align: left;
+	color: #f00;
+	ul {
+		list-style: none;
+		margin: 0 0 18px 0;
+	}
+}
+
+.field_with_errors {
+	@extend .control-group;
+	@extend .error;
+}
+
+.alert {
+	padding: 5px;
+	font-size: 20px;
+	text-align: center;
+	vertical-align: middle;
+	
+	background-color: #fcf8e3;
+	border: 1px solid #fbeed5;
+}
+
+.alert-danger, .alert-error {
+	background-color: #f2dede;
+	border-color: #eed3d7;
+	color: #b94a48;
+}
+
+.alert-success {
+	background-color: #dff0d8;
+	border-color: #d6e9c6;
+	color: #468847;
+}
+
+/****************************************/
+/* Header */
+/****************************************/
+#header {
+	margin: 0;
+	padding: 0;
+	height: $headerHeight;
+	width: 100%;
+
+	background: white;
+	box-shadow: 0px 1px 2px $darkGray;
+
+	a { color: black; }
+	a:hover { color: black; }
+	a:active { color: black; }
+	a:visited { color: black; }
+
+	position: fixed;
+	top: 0;
+	z-index: 4;
+}
+
+#header-logo {
+	float: left;
+	padding: 5px 25px;
+
+	font-family: 'Allan', sans-serif;
+	text-transform: lowercase;
+}
+
+#header-nav {
+	padding-right: 10px;
+	height: 100%;
+	ul {
+		list-style: none;
+		margin: 0;
+		height: 100%;
+	}
+
+	a {
+		font-weight: 400;
+		font-size: 16px;
+		text-transform: uppercase;
+		text-decoration: none;
+	}
+
+	li {
+		display: inline-block;
+		padding: 15px;
+	}
+	li:hover, li:active { 
+		color: $accentColor;
+	}
+}
+
+/****************************************/
+/* Footer */
+/****************************************/
+#footer {
+	margin: 0;
+	padding: 0;
+	height: 40px;
+	width: 100%;
+	min-width: 100%;
+
+	clear: both;
+	position: relative;
+
+	font-weight: 300;
+	font-size: 16px;
+	background: $darkGray;
+	color: $lightGray;
+}
+
+#copyright {
+	padding: 10px 20px;
+	margin: 0;
+	float: left;
+}
+
+#footer-nav {
+	padding-right: 15px;
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	a {
+		font-weight: 300;
+		font-size: 16px;
+		text-transform: uppercase;
+		text-decoration: none;
+	}
+
+	li {
+		display: inline-block;
+		padding: 10px;
+	}
+	li:hover, li:active { 
+		color: $accentColor;
+	}
+}
+
+
+/****************************************/
+/* Signup/Signin Page */
+/****************************************/
+.sign-page-container {
+	padding: 30px;
+	background-image: url('comp-runners-dark.jpg');
+	background-size: cover;
+	background-position: center;
+
+	text-align: center;
+}
+
+.sign-form-container {
+	width: 400px;
+	margin: auto;
+
+	form {
+		padding-top: 25px;
+		width: 100%;
+	}
+
+	label {
+		width: 100%;
+		text-align: left;
+		display: block;
+		padding-bottom: 5px;
+	}
+
+	.input-field {
+		text-align: left;
+		font-family: 'Lato', sans-serif;
+		font-size: 20px;
+		color: black;
+
+		height: 25px;
+		width: 100%;
+		margin-bottom: 25px;
+		padding: 0;
+	}
+
+	.input-textarea {
+		text-align: left;
+		font-family: 'Lato', sans-serif;
+		font-size: 16px;
+		color: black;
+
+		height: 60px;
+		width: 100%;
+		margin-bottom: 25px;
+		padding: 0;
+	}
+}
+
+
+
+/****************************************/
+/* Miscellaneous */
+/****************************************/
+.static-page-container {
+	padding: 30px;
+	text-align: justify;
+
+	h1 {
+		text-align: center;
+	}
+}
+
+.white-transparent-form {
+	background: rgba(255,255,255,0.9);
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+
+	min-height: 500px;
+
+	padding: 20px;
+	font-weight: 300;
+	color: black;
+}
+
+/* Users index */
+.users {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-top: 1px solid $lightGray;
+    &:last-child {
+      border-bottom: 1px solid $lightGray;
+    }
+  }
+}
+
+/****************************************/
+/* Visualizations */
+/****************************************/
+.tracker-vis-container {
+	margin: 0;
+}
+
+.mini-svg-container {
+	margin: auto;
+	width: 200px;
+}
+
+.axis path,
+.axis line {
+	fill: none;
+	stroke: black;
+	shape-rendering: crispEdges;
+}
+
+.axis text {
+	font-size: 11px;
+}
+
+.axis-label {
+	font-size: 14px;
+}
+
+#tooltip {
+	position: absolute;
+	z-index: 5;
+	width: auto;
+	height: auto;
+	padding: 10px;
+	background-color: white;
+	font-size: 12px;
+	text-align: left;
+
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+
+	border: 3px solid $accentColor;
+
+	pointer-events: none;
+}
+
+/****************************************/
+/* Tracker Detail Page */
+/****************************************/
+
+#big-vis-container {
+	width: 650px;
+	height: 450px;
+	padding: 10px;
+	margin: 20px auto;
+	background: rgba(255, 255, 255, 1);
+
+	a { font-weight: 300; }
+	.tracker-title {
+		font-weight: 300;
+		text-overflow: ellipsis;
+		text-transform: capitalize;
+		white-space:nowrap; 
+		overflow: hidden; 
+	}
+
+	.tracker-challenge-subtitle {
+		font-weight: 300;
+		font-size: 13px;
+		font-style: italic;
+		
+		padding: 0;
+		margin: 0;
+		height: 13px;
+		border: 1px solid rgba(255, 255, 255, 0);
+	}
+}
+
+.big-svg-container {
+	margin: auto;
+	width: 630px;
+}
+
+#big-log-form-container {
+	text-align: center;
+	margin: 10px auto 0 auto;
+
+	.input-field {
+		width: 40%;
+		font-family: "Lato", sans-serif;
+		height: 22px;
+		font-size: 16px;
+	}	
+
+	.short-input-field {
+		font-family: "Lato", sans-serif;
+		height: 22px;
+		font-size: 16px;
+		width: 20%;
+	}
+}
+
+.last-log {
+	font-style: italic;
+	color: $darkGray;
+	font-size: 14px;
+	padding-left: 10px;
+}
+
+.leg-svg {
+	.svg-radio-button {
+		border: 1px solid red;
+	}
+}
+
+.legend-header {
+	font-weight: 300;
+	font-size: 14px;
+}
+
+.legend-text {
+	font-size: 13px;
+}
+
+#point-time {
+	font-style: italic;
+	color: $darkGray;
+}
+
+
+/****************************************/
+/* Dashboard Page */
+/****************************************/
+
+table {
+	table-layout: fixed;
+	margin: 0;
+	padding: 0;
+
+	tr, td { 
+		margin: 0;
+		padding: 0;
+		border: none;
+	}
+}
+
+#dashboard-container {
+	padding: 0px;
+	min-height: 650px;
+	width: 100%;
+	min-width: $minWidth;
+	border: none;
+
+	background: url('comp-runners-dark.jpg');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+
+#trackers-container {
+	display: inline-block;
+	padding: 20px;
+	border: none;
+	text-align: center;
+	vertical-align: top;
+}
+
+.center-container {
+	width: 100%;
+	text-align: center;
+}
+
+#tracker-select {
+	text-align: left;
+	font-family: 'Lato', sans-serif;
+	font-size: 16px;
+	width: 70%;
+	padding: 0;
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+#tracker-form-container {
+	padding-left: 10px;
+	padding-right: 12px;
+
+	.input-field {
+		text-align: left;
+		font-family: 'Lato', sans-serif;
+		font-size: 14px;
+		width: 100%;
+		padding: 0;
+		margin: 0 0 5px 0;
+	}
+
+	label {
+		font-size: 14px;
+		color: $darkGray;
+	}
+
+	.date-field {
+		text-align: left;
+		font-family: 'Lato', sans-serif;
+		font-size: 14px;
+		width: 60%;
+		padding: 0;
+		margin: 0 0 5px 0;
+	}
+
+	.short-input-field {
+		text-align: left;
+		font-family: 'Lato', sans-serif;
+		font-size: 14px;
+		width: 47%;
+		padding: 0;
+		margin: 0 0 5px 0;
+	}
+
+	.tracker-form-button {
+		font-size: 14px;
+		padding: 10px 15px;
+	}
+}
+
+.required { border: 2px solid $accentColor; }
+
+#trackers-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.tracker-tile {
+	float: left;
+	width: 270px;
+	height: 270px;
+	margin: 10px;
+	padding-top: 15px;
+
+	background: rgba(255, 255, 255, 0.9);
+
+	a { font-weight: 300; }
+
+	.tracker-title {
+		font-weight: 300;
+		text-overflow: ellipsis;
+		text-transform: capitalize;
+		white-space:nowrap; 
+		overflow: hidden; 
+	}
+
+	.tracker-challenge-subtitle {
+		font-weight: 300;
+		font-size: 13px;
+		font-style: italic;
+		
+		padding: 0;
+		margin: 0;
+		height: 13px;
+		border: 1px solid rgba(255, 255, 255, 0);
+	}
+}
+
+.log-form-container {
+	text-align: center;
+	margin: 0 auto;
+
+	.input-field {
+		width: 40%;
+		font-family: "Lato", sans-serif;
+		height: 25px;
+		font-size: 14px;
+	}	
+
+	.short-input-field {
+		font-family: "Lato", sans-serif;
+		height: 25px;
+		font-size: 14px;
+		width: 20%;
+	}
+}
+
+.log-button {
+	padding: 5px 10px;
+	font-size: 12px;
+}
+
+.tile-icons-container {
+	text-align: center;
+	width: 100%;
+	margin-top: 7px;
+	
+	.tile-icon {
+		opacity: 0.5;
+
+		margin: 0 15px;
+		height: 17px;
+		img {
+			height: 17px;
+		}
+	}
+
+	.tile-icon:hover {
+		opacity: 1;
+	}
+}
+
+#challenges-container {
+	vertical-align: top;
+	text-align: center;
+	width: 250px;
+
+	/*padding-top: 40px;
+	padding-right: 16px;
+	padding-left: 16px;*/
+	padding: 20px;
+	border: none;
+	
+	border-left: 1px solid rgba(0,0,0,0.1);
+
+	button {
+		margin: 15px auto;
+	}
+
+	#challenges-list {
+		text-align: left;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+}
+
+#challenges-tile {
+	background: rgba(255, 255, 255, 0.9);
+
+	margin: 10px;
+	padding: 15px;
+	width: 210px;
+}
+
+.challenge-list-item {
+	margin-top: 10px;
+	.challenge-header {
+		text-transform: capitalize;
+	}
+	.challenge-dates-container {
+		font-weight: 300;
+	}
+}
+
+
+#overlay {
+	background: rgba(0,0,0,0.7); 
+	width: 100%;
+	height: 100%; 
+	z-index: 10;
+	position: fixed; 
+	top: 0; 
+	left: 0; 
+}
+
+
+/****************************************/
+/* New Challenge Page */
+/****************************************/
+#challenge-select {
+	font-family: 'Lato', sans-serif;
+	font-size: 18px;
+	padding-left: 5px;
+	height: 30px;
+
+	-webkit-appearance: none;
+	border-radius: 0px;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+
+	overflow: hidden;
+   	background: url('arrow.png') no-repeat right #fff;
+}
+
+/****************************************/
+/* Show Challenge Page */
+/****************************************/
+
+#challenge-container {
+	width: 70%;
+	padding-left: 10px;
+}
+#challenge-vis-container {
+	background: white;
+	height: 500px;
+	padding: 10px;
+	margin: 20px auto;
+
+	h3 {
+		padding-top: 10px;
+		text-transform: capitalize;
+	}
+}
+
+.challenge-svg-container {
+	width: 700px;
+	margin: auto;
+}
+
+.barsSvg {
+	margin-left: 15px;
+}
+
+#challenge-info-container {
+	width: 260px;
+	padding: 10px;
+	vertical-align: top;
+
+	.challenge-dates-container {
+		font-size: 14px;
+		margin-bottom: 10px;
+	}
+
+	p {
+		margin: 0;
+		padding: 0;
+		font-size: 14px;
+		text-align: justify;
+	}
+
+	.challenge-info-header {
+		margin: 10px 0 5px 0;
+		padding: 0;
+	}
+
+	#challenge-info-users {
+		padding: 0;
+		margin: 0;
+		list-style: none;
+		font-size: 14px;
+	}
+
+	.input-field {
+		text-align: left;
+		font-family: 'Lato', sans-serif;
+		font-size: 14px;
+		width: 100px;
+		height: 20px;
+	}
+
+	form {
+		margin-top: 10px;
+	}
+
+	button {
+		padding: 10px 15px;
+	}
+}
+
+#challenge-info-tile {
+	background: rgba(255, 255, 255, 1);
+	padding: 10px;
+	margin: 10px auto;
+	h3 {
+		padding-top: 10px;
+		padding-bottom: 5px;
+	}
+
+	height: 500px;
+	overflow-y: scroll;
+}
+
+#challenge-messages-container {
+	padding: 10px;
+	margin: 0px auto;
+
+	table {
+		width: 100%;
+		tr, td { 
+			margin: 0;
+			padding: 0;
+		}
+		#message-input-container {
+			width: 88%;
+			.input-field {
+				text-align: left;
+				font-family: 'Lato', sans-serif;
+				font-size: 16px;
+
+				width: 99%;
+				padding: 3px;
+				margin: 0;
+			}
+		}
+		#message-button-container {
+			.button { 
+				float: right; 
+				margin: 0;
+				padding: 10px 15px;
+			}
+		}
+		padding: 2px;
+	}
+
+	
+}
+
+#messages-container {
+	border: 1px solid $darkGray;
+	height: 200px;
+	overflow-y: scroll;
+
+	margin: 5px;
+	padding: 5px;
+
+	.message {
+		.message-time {
+			font-style: italic;
+		}
+
+		.message-body {
+			font-weight: 300;
+		}
+	}
+}
+
+#challenge-messages-tile {
+	background: rgba(255, 255, 255, 1);
+	padding: 10px;
+}
+

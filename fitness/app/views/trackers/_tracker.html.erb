@@ -1,0 +1,58 @@
+<script language="javascript" type="text/javascript">
+
+</script>
+
+<% if tracker.title != nil %>
+<li class="tracker-tile tile" id=<%= "tracker-tile-#{tracker.id}" %>>
+	<% if tracker.challenge_id == nil %>
+		<h3 class="center tracker-title"><%= tracker.title %></h3>
+		<span class="center tracker-challenge-subtitle"></span>
+	<% else %>
+		<h3 class="center tracker-title"><%= link_to tracker.title[0..tracker.title.length-11], Challenge.find_by(id: tracker.challenge_id) %></h3>
+		<span class="center tracker-challenge-subtitle">(Challenge)</span>
+	<% end %>
+
+	<% if tracker.points.any? %>
+		<div class="tracker-vis-container" id=<%= "tracker-vis-container-#{tracker.id}" %>>
+			<div id="tooltip" class="hidden">
+				<span id="point-time"></span><br/>
+				<span id="point-value"></span>
+			</div>
+
+			<%= link_to(tracker) do %>
+			  <div class="mini-svg-container" id=<%= "mini-svg-container-#{tracker.id}" %>></div>
+			<% end %>
+			<%= render 'trackers/mini_vis', :tracker => tracker %>
+			
+		</div>
+	<% end %>
+
+	<% if current_user?(tracker.user) %>
+		<div class="log-form-container">
+			<% if tracker.category == 'custom' || tracker.category == 'weight' %>
+				<%= form_for(tracker) do |f| %>
+					<%= text_field_tag :data, nil, :class => 'input-field', :placeholder => tracker.units, onkeypress: "return isNumberKey(event)" %>
+					<%= f.submit "Log", class: "button log-button" %>
+				<% end %>
+			<% else %>
+				<%= form_for(tracker) do |f| %>
+					<%= text_field_tag :data, nil, :class => 'short-input-field', :placeholder => tracker.units, onkeypress: "return isNumberKey(event)" %>
+					<%= text_field_tag :aux_data, nil, :class => 'short-input-field', :placeholder => tracker.aux_units, onkeypress: "return isNumberKey(event)" %>
+					<%= f.submit "Log", class: "button log-button" %>
+				<% end %>
+			<% end %>
+		</div>
+
+		<div class="tile-icons-container hidden">
+			<!-- %= image_tag('settings-icon.png', class: "tile-icon settings-tile-icon") % -->
+			<%= link_to image_tag('graph-icon.png'), tracker, class: "tile-icon" %>
+			<% if tracker.challenge_id == nil %>
+				<%= link_to image_tag('trash-icon.png'), tracker, class: "tile-icon", method: :delete, data: { confirm: "Are you sure? This will permanently delete this tracker and all of its associated data." }, title: tracker.title %>
+			<% else %>
+				<%= link_to image_tag('trash-icon.png'), remove_user_challenge_path(Challenge.find_by(id: tracker.challenge_id)), class: "tile-icon", method: 'patch', confirm: "Are you sure? This will permanently delete this tracker and remove you from the associated challenge group." %>
+			<% end %>
+		</div>		
+	<% end %>
+	
+</li>
+<% end %> 

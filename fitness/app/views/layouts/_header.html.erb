@@ -1,0 +1,16 @@
+<header id="header">
+  <a href=<%=home_path%>><h1 id="header-logo"><%= title() %></h1></a>
+  <nav id="header-nav">
+    <ul class="pull-right">
+
+		<% if signed_in? %>
+			<%= link_to "<li>Dashboard</li>".html_safe, dashboard_path %>
+			<%= link_to "<li>Settings</li>".html_safe, settings_path %>
+			<%= link_to "<li>Logout</li>".html_safe, signout_path, method: "delete" %>
+		<% else %>
+			<%= link_to "<li>Sign In</li>".html_safe, signin_path %>
+		<% end %>
+
+    </ul>
+  </nav>
+</header>

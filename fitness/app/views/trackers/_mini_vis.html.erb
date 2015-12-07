@@ -1,0 +1,149 @@
+<style>
+	.tick { display: none; }
+</style>
+
+<script style="text/javascript">
+
+	// Dimensions and colors
+	var w = 200;
+	var h = 160;
+	var padding = 10;
+
+	var mainCircleColor = "#3FB8AF";
+	var highlightColor = "#FF3D7F";
+
+	var startColorRange = "#FF6D43";
+	var midColorRange = "#FFC807";
+	var endColorRange = "#9ADE11";
+
+	// Read the data into an array
+	dataset = []
+	<% tracker.points.each do |p| %>
+		var curPoint = [];
+		curPoint.push(<%= p.created_at.strftime('%s') %>);
+		curPoint.push(<%= p.data %>);
+		<% if tracker.category == 'distance' || tracker.category == 'lift' %>
+			curPoint.push(<%= p.aux_data %>);
+		<% end %>
+		dataset.push(curPoint);
+	<% end %>
+
+	generateVis(dataset);
+
+	// Create the visualization with the given dataset
+	function generateVis(dataset) {
+		var xScale = d3.scale.linear()
+							 .domain([d3.min(dataset, function(d) { return d[0]; })-1,
+									  d3.max(dataset, function(d) { return d[0]; })+1])
+							 .range([padding, w - padding]);
+
+		var yScale = d3.scale.linear()
+							 .domain([0, d3.max(dataset, function(d) { return d[1]; })])
+							 .range([h - padding, padding]);
+
+		<% if tracker.category == 'distance' %>
+			var cScale = d3.scale.linear()
+								 .domain([d3.min(dataset, function(d) { return d[1] / d[2]; }),
+										  d3.max(dataset, function(d) { return d[1] / d[2]; })])
+								 .range([startColorRange, endColorRange]);
+		<% elsif tracker.category == 'lift' %>
+			var rScale = d3.scale.linear()
+								 .domain([d3.min(dataset, function(d) { return d[2]; }),
+								 		  d3.max(dataset, function(d) { return d[2]; })])
+								 .range([3, 10]);
+		<% end %>
+
+		var radius = 5;
+		<% if tracker.category == 'distance' || tracker.category == 'lift' %>
+			radius = 7;
+		<% end %>
+
+		var lineFunction = d3.svg.line()
+		                          .x(function(d) { return xScale(d[0]); })
+		                          .y(function(d) { return yScale(d[1]); })
+		                          .interpolate("linear");
+
+		// Define X axis
+		var xAxis = d3.svg.axis()
+						  .scale(xScale)
+						  .orient("bottom")
+						  .ticks(10)
+						  .tickFormat("");
+
+		// Define Y axis
+		var yAxis = d3.svg.axis()
+						  .scale(yScale)
+						  .orient("left")
+						  .ticks(10)
+						  .tickFormat("");
+
+		// Create SVG element
+		var svg = d3.select("#mini-svg-container-" + <%= tracker.id %>)
+					.append("svg")
+					.attr("id", "svg" + <%= tracker.id %>)
+					.attr("width", w)
+					.attr("height", h);
+
+		// Draw lines connecting dots
+		<% if tracker.category == 'custom' || tracker.category == 'weight' %>
+			svg.append("path")
+				.attr("d", lineFunction(dataset))
+				.attr("stroke", mainCircleColor)
+				.attr("stroke-width", 2)
+				.attr("fill", "none");
+		<% end %>
+
+
+		/*<% if tracker.goal != nil && tracker.category != 'lift' %>
+			svg.append("line")
+				.attr("id", "goal-line")
+	            .attr("x1", xScale(d3.min(dataset, function(d) { return d[0]; })-1))
+	            .attr("y1", yScale(<%=tracker.goal%>))
+	            .attr("x2", xScale(d3.max(dataset, function(d) { return d[0]; })+1))
+	            .attr("y2", yScale(<%=tracker.goal%>))
+				.attr("stroke", highlightColor)
+				.attr("stroke-width", 2)
+				.attr("fill", "none")
+				.attr("opacity", 0.5);
+		<% end %>*/
+
+		// Create circles
+		svg.selectAll("circle")
+			.data(dataset)
+			.enter()
+			.append("circle")
+			.attr("cx", function(d) {
+		   		return xScale(d[0]);
+		    })
+		    .attr("cy", function(d) {
+		   		return yScale(d[1]);
+			})
+			.attr("r", function(d) {
+				<% if tracker.category == 'lift' %>
+					return rScale(d[2]);
+				<% else %>
+					return radius;
+				<% end %>
+			})
+			.attr("fill", function(d) {
+				<% if tracker.category == 'distance' %>
+					return cScale(d[1] / d[2]);
+				<% else %>
+					return mainCircleColor;
+				<% end %>
+			});
+
+		// Create X axis
+		svg.append("g")
+			.attr("class", "x axis")
+			.attr("transform", "translate(0," + (h - padding) + ")")
+			.call(xAxis);
+		
+		// Create Y axis
+		svg.append("g")
+			.attr("class", "y axis")
+			.attr("transform", "translate(" + padding + ",0)")
+			.call(yAxis);
+	}
+
+</script>

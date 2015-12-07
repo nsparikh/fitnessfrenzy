@@ -1,0 +1,71 @@
+<% provide(:title, "Dashboard") %>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+<table id="dashboard-container" border="none" width="100%">
+	<tr>
+		<td id="trackers-container" width="99%">
+			<div id="big-vis-container" class="tile" id=<%= "big-vis-container-#{@tracker.id}" %>>
+				<% if @tracker.challenge_id == nil %>
+					<h3 class="center tracker-title"><%= @tracker.title %></h3>
+					<span class="center tracker-challenge-subtitle"></span>
+				<% else %>
+					<h3 class="center tracker-title"><%= link_to @tracker.title[0..@tracker.title.length-11], Challenge.find_by(id: @tracker.challenge_id) %></h3>
+					<span class="center tracker-challenge-subtitle">(Challenge)</span>
+				<% end %>
+
+				<% if @tracker.points.any? %>
+					<div id="tooltip" class="hidden">
+						<span id="point-time"></span><br/>
+						<span id="point-value"></span>
+					</div>
+
+					<div class="big-svg-container" id=<%= "big-svg-container-#{@tracker.id}" %>></div>
+					<% if @tracker.category == 'distance' %>
+						<%= render 'trackers/big_vis_distance', :tracker => @tracker %>
+					<% elsif @tracker.category == 'lift' %>
+						<%= render 'trackers/big_vis_lift', :tracker => @tracker %>
+					<% else %>
+						<%= render 'trackers/big_vis', :tracker => @tracker %>
+					<% end %>
+				<% end %>
+
+				<% if current_user?(@tracker.user) %>
+					<div id="big-log-form-container">
+						<% if @tracker.category == 'custom' || @tracker.category == 'weight' %>
+							<%= form_for(@tracker, :class=>"big-log-form") do |f| %>
+								<%= text_field_tag :data, nil, :class => 'short-input-field', :placeholder => @tracker.units, onkeypress: "return isNumberKey(event)" %>
+								<!--%= date_field_tag :created_at, nil, :class => 'short-input-field' %-->
+								<%= f.submit "Log", class: "button log-button" %>
+								<span class="last-log">Last log: <%= time_ago_in_words(@tracker.updated_at) %> ago</span>
+							<% end %>
+						<% else %>
+							<%= form_for(@tracker, :class=>"big-log-form") do |f| %>
+								<%= text_field_tag :data, nil, :class => 'short-input-field', :placeholder => @tracker.units, onkeypress: "return isNumberKey(event)" %>
+								<%= text_field_tag :aux_data, nil, :class => 'short-input-field', :placeholder => @tracker.aux_units, onkeypress: "return isNumberKey(event)" %>
+								<!--%= date_field_tag :created_at, nil, :class => 'short-input-field' %-->
+								<%= f.submit "Log", class: "button log-button" %>
+								<span class="last-log">Last log: <%= time_ago_in_words(@tracker.updated_at) %> ago</span>
+							<% end %>
+						<% end %>
+						
+					</div>	
+				<% end %>
+			</div>
+		</td>
+
+		<td id="challenges-container" style="white-space: nowrap;">
+			<div id="challenges-tile" class="tile">
+				<h3 class="center">Challenges</h3>
+				<a href=<%= new_challenge_path %>><button>New Challenge</button></a>
+
+				<% if @user.challenges.any? %>
+					<ul id="challenges-list">
+						<%= render @user.challenges %>
+					</ul>
+				<% end %>
+			</div>
+		</td>
+	</tr>
+	
+
+</table>

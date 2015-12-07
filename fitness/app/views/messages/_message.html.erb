@@ -1,0 +1,8 @@
+<div class="message">
+	<span class="message-name"><%= User.find_by(id: message.user_id).name %></span>
+	<span class="message-time"> (<%= message.created_at.strftime("%-m/%-d/%y at %l:%M%P") %>)</span>
+	<span class="message-body">: <%= message.body %></span>
+	<br/>
+
+
+</div>

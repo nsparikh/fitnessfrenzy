@@ -1,0 +1,18 @@
+<h3 class="center tracker-title"><%= tracker.title %></h3>
+
+<%= form_for(tracker, class: "tracker-form") do |f| %>
+	<%= f.text_field :title, placeholder: "Title", class: "input-field", maxlength: "30" %>
+	<%= f.text_field :units, placeholder: "Units", class: "input-field" %>
+	<%= f.text_field :goal, placeholder: "Goal", class: "input-field", onkeypress: "return isNumberKey(event)" %>
+	<table>
+		<tr>
+			<td class="vert-center"><%= f.label :start_date %></td>
+			<td class="date-field"><%= f.date_field :start_date, placeholder: "Start date", class: "input-field" %></td>
+		</tr>
+		<tr>
+			<td class="vert-center"><%= f.label :end_date %></td>
+			<td class="date-field"><%= f.date_field :end_date, placeholder: "End date", class: "input-field" %></td>
+		</tr>
+	</table>
+	<div class="center-container"><%= f.submit "Save", class: "button tracker-form-button" %></div>
+<% end %>

@@ -1,0 +1,156 @@
+// Place all the styles related to the StaticPages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+/****************************************/
+/* Colors */
+/****************************************/
+$mainColor: #3FB8AF; /* 63, 184, 175 */
+$accentColor: #FF3D7F;
+$darkGray: #7A7A7A;
+$lightGray: #EEEEEE;
+$paleMainColor: #BDF0EC;
+$paleAccentColor: #FFC9DC;
+
+$headerHeight: 50px;
+
+/****************************************/
+/* Home Page */
+/****************************************/
+#splash-photo-container {
+	background: url('comp-runners-dark.jpg');
+	background-size: cover;
+	background-position: center;
+	height: 700px;
+
+	text-align: center;
+}
+
+#splash-text {
+	padding-top: 170px;
+
+	font-weight: 400;
+	font-size: 60px;
+	color: white;
+}
+#splash-subtext {
+	padding-top: 15px;
+
+	font-weight: 400;
+	font-size: 50px;
+	color: white;
+}
+
+#splash-button {
+	margin-top: 30px;
+}
+
+#info-container {
+	height: 300px;
+	text-align: center;
+	padding-top: 60px;	
+
+	background: rgba(63, 184, 175, 0.8);
+	color: white;
+}
+
+.info-icon-container {
+	display: inline-block;
+	width: 200px;
+	margin: 0 20px;
+
+}
+.info-icon {
+	height: 100px;
+	width: 100px;
+	padding: 5px;
+}
+
+#progress-icon {
+	width: 150px;
+	height: 120px;
+}
+
+.detail-container {
+	padding: 80px 100px;
+	height: 250px;
+
+	img {
+		height: 250px; 
+		min-width: 400px;
+		max-width: 450px;
+		
+		border-radius: 3px;
+		-moz-border-radius: 3px;
+		-webkit-border-radius: 3px;
+		box-shadow: 0px 0px 3px $darkGray;
+	}
+}
+
+.dark-detail {
+	background: $lightGray;
+}
+
+
+.detail-text-container {
+	text-align: justify;
+	p {
+		color: $darkGray;
+		font-weight: 300;
+		font-size: 18px;
+	}
+}
+
+.detail-left {
+	float: left;
+	width: 45%;
+
+	h2 {
+		text-align: right;
+	}
+}
+
+.detail-right {
+	float: right;
+	width: 45%;
+}
+
+#signup-container {
+	text-align: center;
+	background: $mainColor;
+	color: white;
+	margin: 0;
+	padding: 50px;
+}
+
+/****************************************/
+/* About Page */
+/****************************************/
+
+#about-page-container {
+	background-image: url('comp-runners-dark.jpg');
+	background-size: cover;
+	background-position: center;
+}
+
+#about-container {
+	width: 400px;
+	margin: auto;
+}
+
+
+
+/****************************************/
+/* Help Page */
+/****************************************/
+
+#help-page-container {
+	background-image: url('comp-runners-dark.jpg');
+	background-size: cover;
+	background-position: center;
+}
+
+#help-container {
+	width: 400px;
+	margin: auto;
+}

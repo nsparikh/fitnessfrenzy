@@ -1,0 +1,53 @@
+<div id="splash-photo-container">
+	<h1 id="splash-text" class="text-shadow">Win your way to a better you</h1>
+	<a href=<%= signup_path %>><button id="splash-button">Get started ></button></a>
+
+
+</div>
+
+<div id="info-container">
+	<h2 id="info-header">We help you reach your fitness goals.</h2>
+	<div class="info-icon-container">
+		<%= image_tag("health-white.png", class: "info-icon") %>
+		<h3>Take control of your personal health</h3>
+	</div>
+	<div class="info-icon-container">
+		<%= image_tag("progress-white.png", class: "info-icon", id: "progress-icon") %>
+		<h3>Track your progress as you grow</h3>
+	</div>
+	<div class="info-icon-container">
+		<%= image_tag("friends-white.png", class: "info-icon") %>
+		<h3>Compete with friends and stay motivated</h3>
+	</div>
+</div>
+
+
+
+<div id="tracking-detail-container" class="detail-container dark-detail">
+	<%= image_tag("dashboard.png", class: "detail-image detail-left") %>
+	<div class="detail-text-container detail-right">
+		<h2>Personalized progress tracking</h2>
+		<p>FitnessFrenzy allows you to create custom, personalized progress trackers, or choose from a premade set of tracking templates. Whether you've set out to train for your next marathon, complete a new diet plan, or reach a new weight lifting goal, we can help you grow. </p>
+	</div>
+</div>
+
+<div id="social-detail-container" class="detail-container">
+	<div class="detail-text-container detail-left">
+		<h2>Social motivation</h2>
+		<p>The best motivation is competition. FitnessFrenzy lets you create challenges with your friends who share common fitness goals. Watch your competitors as the challenge progresses and see how close you are to the top. You don't have to worry about preset constraints or timelines  -- you make the rules.</p>
+	</div>
+	<%= image_tag("challenge.png", class: "detail-image detail-right") %>
+</div>
+
+<div id="vis-detail-container" class="detail-container dark-detail">
+	<%= image_tag("running-vis-2.png", class: "detail-image detail-left") %>
+	<div class="detail-text-container detail-right">
+		<h2>Intuitive, insigtful visualizations</h2>
+		<p>Our extraordinary visualizations are much more than graphs and charts. Interact with your data and discover keen insights into your personal health. Keep track of your progress as you reach your goal through one seamless user experience.</p>
+	</div>
+</div>
+
+<div id="signup-container">
+	<h1 class="text-shadow">What are you waiting for?</h1>
+	<a href=<%= signup_path %>><button id="splash-button">Sign up now!</button></a>
+</div>

@@ -1,0 +1,103 @@
+<% provide(:title, @challenge.title) %>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+<table id="dashboard-container" border="none" width="100%">
+	<tr>
+		<td id="challenge-container" >
+			<div id="challenge-vis-container" class="tile">
+				<h3 class="center"><%= @challenge.title %></h3>
+
+				<div id="tooltip" class="hidden">
+					<span id="point-time"></span><br/>
+					<span id="point-value"></span>
+				</div>
+
+				<div class="challenge-svg-container" id=<%= "challenge-svg-container-#{@challenge.id}" %>></div>
+				<%= render 'challenges/challenge_vis', :challenge => @challenge %>		
+
+				<div id="big-log-form-container">
+					<%= form_for(@tracker, :class=>"big-log-form") do |f| %>
+						<%= text_field_tag :data, nil, :class => 'input-field', :placeholder => @tracker.units, onkeypress: "return isNumberKey(event)" %>
+						<%= f.submit "Log", class: "button log-button" %>
+						<span class="last-log">Your last log: <%= time_ago_in_words(@tracker.updated_at) %> ago</span>
+					<% end %>
+				</div>		
+			</div>
+		</td>
+
+		<td id="challenge-info-container">
+			<div id="challenge-info-tile" class="tile">
+				<h3 id="challenge-title-header" class="center">Challenge Info</h3>
+				<div class="challenge-dates-container center-container">
+					<%= (@challenge.start_date).strftime('%b %d, %Y') %> - <%= (@challenge.end_date).strftime('%b %d, %Y') %>
+				</div>
+
+				<h4 class="challenge-info-header">Description</h4>
+				<p><%= @challenge.description %></p>
+
+				<h4 class="challenge-info-header">Goal</h4>
+				<p>
+					<% if @challenge.category == 'highest_value' %>
+					Highest Value Challenge: the winner of this challenge will be the member who has the highest value at the end date.
+					<% elsif @challenge.category == 'lowest_value' %>
+					Lowest Value Challenge: the winner of this challenge will be the member who has the lowest value at the end date.
+					<% elsif @challenge.category == 'greatest_increase' %>
+					Greatest Increase Challenge: the winner of this challenge will be the member who shows the greatest increase in value from the start date to the end date.	
+					<% elsif @challenge.category == 'greatest_decrease' %>
+					Greatest Decrease Challenge: the winner of this challenge will be the member who shows the greatest decrease in value from the start date to the end date.
+					<% elsif @challenge.category == 'greatest_percent_increase' %>
+					Greatest Percent Increase Challenge: the winner of this challenge will be the member who shows the greatest percent increase in value from the start date to the end date. The percent change is measured as a proportion of each member's starting value.
+					<% elsif @challenge.category == 'greatest_percent_decrease' %>
+					Greatest Percent Decrease Challenge: the winner of this challenge will be the member who shows the greatest percent decrease in value from the start date to the end date. The percent change is measured as a proportion of each member's starting value.
+					<% elsif @challenge.category == 'highest_cumulative' %>
+					Highest Cumulative Total Challenge: the winner of this challenge will be the member who shows the greatest cumulative value over the span of the challenge. 
+					<% elsif @challenge.category == 'lowest_cumulative' %>
+					Lowest Cumulative Total Challenge: the winner of this challenge will be the member who shows the lowest cumulative value over the span of the challenge. 
+					<% end %>
+				</p>
+
+				<h4 class="challenge-info-header">Members</h4>
+				<ul id="challenge-info-users">
+					<%= render @challenge.users %>
+				</ul>
+
+				
+				<div class="center-container">
+					<%= form_for(@challenge, :url => {:action => "add_user"}, :class=>"challenge-user-form") do |f| %>
+						<%= text_field_tag :user_email, nil, :class => 'input-field', :placeholder => "User Email" %>
+						<%= f.submit "Add User", class: "button log-button" %>
+					<% end %>
+					<br/>
+					<%= link_to '<button>Edit Challenge</button>'.html_safe, edit_challenge_path(@challenge) %>
+					<%= link_to '<button>Leave Group</button>'.html_safe, remove_user_challenge_path(@challenge), :confirm => "Are you sure you want to leave this challenge group?", :method => 'patch' %>
+				</div>
+			</div>
+		</td>
+	</tr>
+
+	<tr>
+		<td id="challenge-messages-container" colspan="2">
+			<div id="challenge-messages-tile" class="tile">
+				<h3 class="center">Message Board</h3>
+				<div id="messages-container">
+					<%= render @challenge.messages %>
+				</div>
+
+				<table>
+					<tr>
+						<%= form_for([@challenge, @challenge.messages.build]) do |f| %>
+						<td id="message-input-container"><%= f.text_field :body, class: "input-field", placeholder: "Write a message..." %></td>
+						<td id="message-button-container"><%= f.submit "Submit", class: "button" %></td>
+						<% end %>
+					</tr>
+				</table>
+
+			</div>
+		</td>
+	</tr>
+</table>
+	
+
+
+
+

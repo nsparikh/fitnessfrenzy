@@ -1,0 +1,6 @@
+<li class="challenge-list-item">
+	<span class="challenge-header"><%= link_to challenge.title, challenge %></span><br/>
+	<span class="challenge-dates-container">
+		<%= (challenge.start_date).strftime('%b %d, %Y') %> - <%= (challenge.end_date).strftime('%b %d, %Y') %>
+	</span>
+</li>

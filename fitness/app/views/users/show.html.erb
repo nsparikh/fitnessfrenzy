@@ -1,0 +1,77 @@
+<% provide(:title, "Dashboard") %>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+<script language="javascript" type="text/javascript">
+	jQuery(function($) {
+		$('#tracker-select').on('change', function() {
+			$("#tracker-form-container").html("");
+
+			if ($("#tracker-select").val() == 'weight') {
+				$("#tracker-form-container").append("<%= escape_javascript render(:partial => 'trackers/weight_form') %>");
+			} else if ($("#tracker-select").val() == 'lifting') {
+				$("#tracker-form-container").append("<%= escape_javascript render(:partial => 'trackers/lift_form') %>");
+			} else if ($("#tracker-select").val() == 'running' || $("#tracker-select").val() == 'biking') {
+				$("#tracker-form-container").append("<%= escape_javascript render(:partial => 'trackers/distance_form') %>");
+			} else if ($("#tracker-select").val() == 'custom') {
+				$("#tracker-form-container").append("<%= escape_javascript render(:partial => 'trackers/custom_form') %>");
+			} 
+			
+		});
+
+		$('.tracker-tile').on('mouseover', function() {
+			$(this).find('.tile-icons-container').removeClass('hidden');
+		});
+
+		$('.tracker-tile').on('mouseout', function() {
+			$(this).find('.tile-icons-container').addClass('hidden');
+		});
+	});
+
+</script>
+
+<div id="overlay" class="hidden">
+	<div id="big-vis-container"></div>
+</div>
+
+<table id="dashboard-container" border="none">
+	<tr>
+		<td id="trackers-container">
+			<div class="tracker-tile tile">
+				<h3 class="center">Create new tracker</h3>
+				<div class="center-container">
+					<select id="tracker-select">
+						<option value="blank"></option>
+						<option value="weight">Weight Loss/Gain</option>
+						<option value="lifting">Weight Lifting</option>
+						<option value="running">Running</option>
+						<option value="biking">Biking</option>
+						<option value="custom">Custom</option>
+					</select>
+				</div>
+				<div id="tracker-form-container"></div>
+			</div>
+
+			<% if @user.trackers.any? %>
+				<ul id="trackers-list">
+					<%= render @user.trackers %>
+				</ul>
+			<% end %>
+		</td>
+
+		<td id="challenges-container">
+			<div id="challenges-tile" class="tile">
+				<h3 class="center">Challenges</h3>
+				<a href=<%= new_challenge_path %>><button>New Challenge</button></a>
+
+				<% if @user.challenges.any? %>
+					<ul id="challenges-list">
+						<%= render @user.challenges %>
+					</ul>
+				<% end %>
+			</div>
+		</td>
+	</tr>
+	
+
+</table>
+
